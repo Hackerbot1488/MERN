@@ -1,0 +1,5 @@
+{
+  "port": 6000,
+  "jwtSecret": "KristoferWalles",
+  "mongoUrl": "mongodb+srv://Hackerbot1488:R@in040101@cluster0-qywlr.azure.mongodb.net/app?retryWrites=true&w=majority"
+}
