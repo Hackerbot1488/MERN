@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('config')
 const {check, validationResult} = require('express-validator')
@@ -23,7 +23,6 @@ router.post(
           message: 'Uncorrect register data'
         })
       }
-
       const {email, password} = request.body
 
       const candidate = await User.findOne({ email })
@@ -33,16 +32,17 @@ router.post(
       }
 
       const hashedPassword = await bcrypt.hash(password, 12)
-      const user = {
+      const user = new User({
         email,
-        hashedPassword
-      }
+        password: hashedPassword
+      })
 
       await user.save()
 
       response.status(201).json({message: 'User has been successfully registered'})
 
     } catch (e) {
+      console.log(e)
       response.status(500).json({message: 'Something was wrong. Try again.'})
     }
 })
