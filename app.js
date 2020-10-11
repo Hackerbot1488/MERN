@@ -10,7 +10,7 @@ app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/link', require('./routes/link.routes'))
 app.use('/t', require('./routes/redirect.routes'))
 
-if (process.env.NODE_ENV === 'production') {
+if (true) {
   app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
   app.get('*', (req, res) => {
@@ -21,9 +21,9 @@ if (process.env.NODE_ENV === 'production') {
 
 const siren = chalk.rgb(93, 95, 255)
 const rcolor = chalk.rgb(127, 98, 201)
-const PORT = config.get('port') || 5000
+const PORT = process.env.PORT || 5000
 
-async function start () {
+async function start() {
   try {
     await mongoose.connect(config.get('mongoUrl'), {
       useNewUrlParser: true,
